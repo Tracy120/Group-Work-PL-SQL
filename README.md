@@ -1,183 +1,50 @@
-Group-Work-PL-SQL
-Library Database System - Group work Report
-Group Members:
-
-Uwase Tracy
-Munezero Cindy
-Isimbi Iris
-
-Table of Contents
-
-Executive Summary
-1. Tables Created with Constraints
-2. JOIN Operations Performed
-3. Index Implementation
-4. View Creation
-5. Query Results and Analysis
-6. Technical Implementation
-7. Conclusion
-Your Very First Table and Add Some Data
-Project Tables
-
-Table 1: Authors
-Table 2: Books
-Table 3: Members
-Table 4: Borrowings
 
 
-JOIN Operations
+# Group-Work-PL-SQL
+## Library Database System - Group Work Report
 
-INNER JOIN (Test 1)
-LEFT JOIN (Test 2)
-RIGHT JOIN (Test 3)
-FULL OUTER JOIN (Test 4)
+**Group Members:**  
+- Uwase Tracy 27105  
+- Munezero Cindy 27121  
+- Isimbi Iris 27120  
 
+---
 
-Index
-View
+## Executive Summary
+Our team successfully designed and implemented a **Library Management Database System** that demonstrates all required database concepts including table creation with constraints, various join operations, indexing for performance optimization, and views for simplified data access.
 
-Executive Summary
-Our team successfully designed and implemented a Library Management Database System that demonstrates all required database concepts including table creation with constraints, various join operations, indexing for performance optimization, and views for simplified data access.
-1. Tables Created with Constraints
-Database Schema
+---
+
+## Tables Created with Constraints
 We created 4 interconnected tables with comprehensive constraints:
-Authors Table:
 
-Primary Key: author_id (auto-incrementing)
-NOT NULL constraints on first_name and last_name
-Data validation for essential author information
+**Authors Table:**  
+- Primary Key: `author_id`  
+- NOT NULL: `first_name`, `last_name`  
 
-Books Table:
+**Books Table:**  
+- Primary Key: `book_id`  
+- Foreign Key: `author_id` references Authors  
+- NOT NULL: `title`  
+- DEFAULT: `copies_available = 0`  
 
-Primary Key: book_id
-Foreign Key: author_id references Authors table
-NOT NULL constraint on title
-DEFAULT value for copies_available (0)
-Maintains referential integrity with authors
+**Members Table:**  
+- Primary Key: `member_id`  
+- UNIQUE: `email`  
+- NOT NULL on essential fields  
+- DEFAULT: `join_date = CURRENT_DATE`  
 
-Members Table:
+**Borrowings Table:**  
+- Primary Key: `borrowing_id`  
+- Foreign Keys: `member_id`, `book_id`  
+- `return_date` can be NULL  
 
-Primary Key: member_id
-UNIQUE constraint on email (prevents duplicate registrations)
-NOT NULL constraints on essential fields
-DEFAULT value for join_date (current date)
+---
 
-Borrowings Table:
+## SQL Tables and Sample Data
 
-Primary Key: borrowing_id
-Two Foreign Keys: member_id and book_id
-Tracks book lending relationships
-Supports NULL values for return_date (ongoing loans)
-
-Constraints Applied:
-
-Primary Keys - Unique identifiers for each table
-Foreign Keys - Maintain data relationships and integrity
-NOT NULL - Ensure critical data cannot be missing
-UNIQUE - Prevent duplicate emails
-DEFAULT - Automatic values for dates and quantities
-
-2. JOIN Operations Performed
-INNER JOIN
-
-Purpose: Retrieved books with their corresponding authors
-Result: Displayed 4 books matched with author information
-Use Case: Show complete book-author relationships for catalog displays
-
-LEFT JOIN
-
-Purpose: Showed all members and their borrowing history
-Result: All 3 members displayed, including those without current loans
-Use Case: Member activity reports showing both active and inactive borrowers
-
-RIGHT JOIN
-
-Purpose: Displayed all books and their borrowing status
-Result: All books shown, including those never borrowed
-Use Case: Inventory management to identify popular vs unused books
-
-FULL OUTER JOIN
-
-Purpose: Complete view of author-book relationships
-Result: Comprehensive data showing all authors and books
-Use Case: Complete catalog overview for administrative purposes
-
-3. Index Implementation
-Indexes Created:
-
-idx_book_title - Optimizes book title searches
-idx_member_email - Speeds up member login/lookup
-idx_borrowing_member - Enhances borrowing history queries
-
-Performance Benefits:
-
-Search Speed: Reduced query time from linear to logarithmic
-User Experience: Faster book searches and member authentication
-Scalability: System remains efficient as data grows
-Resource Optimization: Lower CPU usage for frequent queries
-
-4. View Creation
-Active Borrowings View
-Purpose: Simplifies complex multi-table queries for daily operations
-Features:
-
-Combines data from 4 tables (borrowings, members, books, authors)
-Provides readable member names and book titles
-Shows borrowing dates and return status
-Eliminates need for complex JOIN syntax in daily queries
-
-Benefits:
-
-Simplified Access - Librarians can easily see current loans
-Data Security - Controls which data users can access
-Consistency - Ensures uniform data presentation
-Maintenance - Single point to modify complex query logic
-
-5. Query Results and Analysis
-Key Statistics:
-
-Total Authors: 3 (George Orwell, Jane Austen, Agatha Christie)
-Total Books: 4 titles with varying availability
-Total Members: 3 registered library users
-Active Borrowings: 2 books currently on loan
-
-Sample Query Results:
-INNER JOIN Result:
-TitleAuthor Name1984George OrwellAnimal FarmGeorge OrwellPride and PrejudiceJane AustenMurder on Orient ExpressAgatha Christie
-Active Borrowings View Result:
-Member NameBook TitleBorrow DateBob SmithAnimal Farm2024-02-01Alice JohnsonPride and Prejudice2024-02-10
-6. Technical Implementation
-Database Design Principles:
-
-Normalization: Eliminated data redundancy across tables
-Referential Integrity: Foreign keys ensure data consistency
-Data Validation: Constraints prevent invalid data entry
-Flexibility: Schema supports easy expansion and modification
-
-Performance Considerations:
-
-Strategic indexing on frequently queried columns
-Efficient view design for common operations
-Optimized table relationships for fast joins
-
-7. Conclusion
-Our Library Management Database System successfully demonstrates all required database concepts while creating a practical, real-world applicable solution. The implementation showcases:
-
-Robust Design: Proper normalization and constraint usage
-Performance Optimization: Strategic indexing and efficient queries
-User-Friendly Access: Views that simplify complex operations
-Scalability: Architecture that supports growth and expansion
-
-The project provides a solid foundation for understanding relational database concepts and their practical implementation in business environments.
-Final Deliverables:
-
-4 normalized tables with comprehensive constraints
-4 different JOIN operations with practical examples
-3 performance-optimized indexes
-1 multi-table view for simplified access
-
-
-1. Your Very First Table and Add Some Data
+**Students Table**
+```sql
 CREATE TABLE students (
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
@@ -302,9 +169,29 @@ JOIN authors a ON b.author_id = a.author_id;
 SELECT * FROM active_borrowings;
 ![alt text](image-10.png)
 
+Conclusion
+
+The Library Management Database System demonstrates:
+
+Robust Design: Proper normalization and constraint usage
+
+Optimized Performance: Indexes and efficient queries
+
+User-Friendly Access: Views simplify complex operations
+
+Scalability: Supports growth and expansion
+
+Final Deliverables:
+
+4 normalized tables with constraints
+
+4 JOIN operations with examples
+
+3 performance-optimized indexes
+
+1 multi-table view for simplified access
 
 
 
 
 
-![alt text](image.png)
