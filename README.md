@@ -44,7 +44,7 @@ We created 4 interconnected tables with comprehensive constraints:
 ## SQL Tables and Sample Data
 
 **Students Table**
-```sql
+sql
 CREATE TABLE students (
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
